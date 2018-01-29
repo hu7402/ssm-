@@ -1,0 +1,4 @@
+service\UserService.class
+action\UserAction.class
+mapper\UserMapper.class
+model\User.class

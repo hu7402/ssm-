@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射接口-->
+<mapper namespace="mapper.UserMapper">
+<select id="selectByName" parameterType="User" resultType="User">
+	select * from user where username=#{username}
+</select>
+
+<update id="update" parameterType="User" >
+	update user set nickname=#{nickname},age=#{age},sex=#{sex},mobile=#{mobile},address=#{address} where id=#{id}
+</update>
+
+<select id="selectById" parameterType="int" resultType="User">
+	select * from user where id=#{id}
+</select>
+
+<select id="selectByUsername" parameterType="String" resultType="User">
+	select * from user where username=#{username}
+</select>
+
+<select id="selectAllUser" resultType="User" >
+	select * from user 
+</select>
+
+<!-- 邮箱 -->
+<insert id="insert" parameterType="Mail">
+	insert into mail(receiver,sender,subject,content,sendtime,mailfile,isread,isshow,filename) values(#{receiver},#{sender},#{subject},#{content},#{sendtime},#{mailfile},#{isread},#{isshow},#{filename})
+</insert>
+
+<select id="getMailByName" parameterType="String" resultType="Mail" >
+	select * from mail where receiver=#{receiver} and isshow=1
+</select>
+
+ <select id="selectMailById"  parameterType="int" resultType="Mail">
+	select * from mail where id=#{id} and isshow=1
+</select> 
+
+<update id="updateMail" parameterType="Mail" >
+	update mail set isread=#{isread} where id=#{id}
+</update>
+
+<update id="updateMailIsshow" parameterType="Mail">
+	update mail set isshow=#{isshow} where id=#{id}
+</update>
+
+
+<select id="getMailIsshow" parameterType="String" resultType="Mail" >
+	select * from mail where receiver=#{receiver} and isshow=0
+</select>
+
+<update id="updateRubMailIsshow" parameterType="Mail">
+	update mail set isshow=#{isshow} where id=#{id}
+</update>  
+
+<select id="selectAllMailById"  parameterType="int" resultType="Mail">
+	select * from mail where id=#{id} 
+</select>
+
+ <delete id="deleteMailById" parameterType="int">
+	delete from mail where id=#{id}
+</delete> 
+
+<!-- 请假 -->
+<select id="getHolidayByApplyer" parameterType="String" resultType="Holiday" >
+	select * from holiday where applyer=#{applyer} 
+</select>
+ 
+<select id="selectUserIsadmin" resultType="User" >
+	select * from user where isadmin=1
+</select>
+
+<select id="getHolidayByAuditor" parameterType="String" resultType="Holiday" >
+	select * from holiday where auditor=#{auditor} 
+</select>
+
+<insert id="insertHoliday" parameterType="Holiday">
+	insert into holiday(applyer,beginTime,endTime,days,checks,leaveReason,auditor) values(#{applyer},#{beginTime},#{endTime},#{days},#{checks},#{leaveReason},#{auditor})
+</insert>
+
+<select id="selectHolidayById" parameterType="int" resultType="Holiday">
+	select * from holiday where id=#{id}
+</select>
+
+<update id="updateHoliday" parameterType="Holiday">
+	update holiday set checks=#{checks} where id=#{id}
+</update>
+<update id="updateHolidayNo" parameterType="Holiday">
+	update holiday set checks=#{checks} where id=#{id}
+</update>
+
+<update id="updateUserAccount" parameterType="User">
+	update  user set username=#{username},password=#{password} where id=#{id}
+</update>
+
+<insert id="insertUser" parameterType="User">
+	insert into user(username,password,nickname,age,sex,mobile,address,isadmin) values(#{username},#{password},#{nickname},#{age},#{sex},#{mobile},#{address},#{isadmin})
+</insert>
+
+<delete id="deleteUser" parameterType="int">
+	delete from user where id=#{id}
+</delete>
+<select id="checkUser" parameterType="String" resultType="user">
+select * from user where username=#{username}
+</select>
+
+</mapper>
